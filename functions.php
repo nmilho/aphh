@@ -4,7 +4,7 @@
  * Include CSS files
  */
 function theme_enqueue_scripts() {
-        wp_enqueue_style( 'Font_Awesome', 'https://use.fontawesome.com/releases/v5.6.1/css/all.css' );
+        wp_enqueue_style( 'Font_Awesome', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' );
         wp_enqueue_style( 'Bootstrap_css', get_template_directory_uri() . '/css/bootstrap.min.css' );
         wp_enqueue_style( 'MDB', get_template_directory_uri() . '/css/mdb.min.css' );
         wp_enqueue_style( 'Style', get_template_directory_uri() . '/style.css' );
@@ -16,4 +16,13 @@ function theme_enqueue_scripts() {
         }
 add_action( 'wp_enqueue_scripts', 'theme_enqueue_scripts' );
 
+
+/**
+ * Setup Theme
+ */
+function mdbtheme_setup() {
+    // Add featured image support
+    add_theme_support('post-thumbnails');
+}
+add_action('after_setup_theme', 'mdbtheme_setup');
 ?>

@@ -33,10 +33,10 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link waves-effect" href="https://mdbootstrap.com/docs/jquery/getting-started/download/" target="_blank">Link</a>
+                    <a class="nav-link waves-effect" href="https://mdbootstrap.com/getting-started/" target="_blank">Link</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link waves-effect" href="https://mdbootstrap.com/education/bootstrap/" target="_blank">Link</a>
+                    <a class="nav-link waves-effect" href="https://mdbootstrap.com/bootstrap-tutorial/" target="_blank">Link</a>
                 </li>
             </ul>
 
@@ -44,12 +44,12 @@
             <ul class="navbar-nav nav-flex-icons">
                 <li class="nav-item">
                     <a href="https://www.facebook.com/mdbootstrap" class="nav-link waves-effect" target="_blank">
-                        <i class="fab fa-facebook-f"></i>
+                        <i class="fa fa-facebook"></i>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="https://twitter.com/MDBootstrap" class="nav-link waves-effect" target="_blank">
-                        <i class="fab fa-twitter"></i>
+                        <i class="fa fa-twitter"></i>
                     </a>
                 </li>
                 <li class="nav-item">
