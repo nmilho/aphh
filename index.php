@@ -10,7 +10,7 @@
 ?>
 
 
-<!------- MAIN <body>  ------->
+<!-- MAIN <body>  -->
 
 
 
@@ -22,12 +22,6 @@
 
 
 
-  
-
-      <header>
-         <h1><?php bloginfo('name'); ?></h1>
-         <h3><?php bloginfo('description'); ?></h3>
-      </header>
 
         <?php
         if ( have_posts() ) :
@@ -38,7 +32,7 @@
         endif;
         ?>
 
-<!------- END MAIN </body>  ------->
+<!-- END MAIN </body>  -->
 
 
 <?php

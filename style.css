@@ -24,7 +24,9 @@ Author URI: https://mdbootstrap.com
     border-radius: 0 !important; }
 
 .navbar-brand img {
-  height: 20px; }
+	/*height: 20px; 	*/
+	height: 100px; 
+}
 
 .pagination .page-item.active .page-link {
   background-color: #09c; }
