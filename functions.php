@@ -71,27 +71,11 @@ add_action( 'after_setup_theme', 'themename_custom_logo_setup' );
 function create_bootstrap_menu( $theme_location ) {
     if ( ($theme_location) && ($locations = get_nav_menu_locations()) && isset($locations[$theme_location]) ) {
          
-        $menu_list  = '<nav class="navbar navbar-default">' ."\n";
-        $menu_list .= '<div class="container-fluid">' ."\n";
-        $menu_list .= '<!-- Brand and toggle get grouped for better mobile display -->' ."\n";
-        $menu_list .= '<div class="navbar-header">' ."\n";
-        $menu_list .= '<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">' ."\n";
-        $menu_list .= '<span class="sr-only">Toggle navigation</span>' ."\n";
-        $menu_list .= '<span class="icon-bar"></span>' ."\n";
-        $menu_list .= '<span class="icon-bar"></span>' ."\n";
-        $menu_list .= '<span class="icon-bar"></span>' ."\n";
-        $menu_list .= '</button>' ."\n";
-        $menu_list .= '<a class="navbar-brand" href="' . home_url() . '">' . get_bloginfo( 'name' ) . '</a>';
-        $menu_list .= '</div>' ."\n";
-           
-        $menu_list .= '<!-- Collect the nav links, forms, and other content for toggling -->';
-         
-         
         $menu = get_term( $locations[$theme_location], 'nav_menu' );
         $menu_items = wp_get_nav_menu_items($menu->term_id);
- 
-        $menu_list .= '<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">' ."\n";
-        $menu_list .= '<ul class="nav navbar-nav">' ."\n";
+
+        $menu_list = '<!-- Left -->' ."\n";
+        $menu_list .= '<ul class="navbar-nav mr-auto">' ."\n";
           
         foreach( $menu_items as $menu_item ) {
             if( $menu_item->menu_item_parent == 0 ) {
@@ -103,22 +87,22 @@ function create_bootstrap_menu( $theme_location ) {
                 foreach( $menu_items as $submenu ) {
                     if( $submenu->menu_item_parent == $parent ) {
                         $bool = true;
-                        $menu_array[] = '<li><a href="' . $submenu->url . '">' . $submenu->title . '</a></li>' ."\n";
+                        $menu_array[] = '<li class="nav-item active"><a class="nav-link waves-effect" href="' . $submenu->url . '">' . $submenu->title . '<span class="sr-only">(current)</span></a></li>' ."\n";
                     }
                 }
                 if( $bool == true && count( $menu_array ) > 0 ) {
                      
-                    $menu_list .= '<li class="dropdown">' ."\n";
-                    $menu_list .= '<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">' . $menu_item->title . ' <span class="caret"></span></a>' ."\n";
+                    $menu_list .= '<li class="nav-item dropdown">' ."\n";
+                    $menu_list .= '<a class="nav-link dropdown-toggle waves-effect" id="navbarDropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' . $menu_item->title . '</a>' ."\n";
                      
-                    $menu_list .= '<ul class="dropdown-menu">' ."\n";
+                    $menu_list .= '<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">' ."\n";
                     $menu_list .= implode( "\n", $menu_array );
-                    $menu_list .= '</ul>' ."\n";
+                    $menu_list .= '</div>' ."\n";
                      
                 } else {
                      
-                    $menu_list .= '<li>' ."\n";
-                    $menu_list .= '<a href="' . $menu_item->url . '">' . $menu_item->title . '</a>' ."\n";
+                    $menu_list .= '<li class="nav-item">' ."\n";
+                    $menu_list .= '<a class="nav-link waves-effect" href="' . $menu_item->url . '">' . $menu_item->title . '</a>' ."\n";
                 }
                  
             }
@@ -128,9 +112,6 @@ function create_bootstrap_menu( $theme_location ) {
         }
           
         $menu_list .= '</ul>' ."\n";
-        $menu_list .= '</div>' ."\n";
-        $menu_list .= '</div><!-- /.container-fluid -->' ."\n";
-        $menu_list .= '</nav>' ."\n";
   
     } else {
         $menu_list = '<!-- no menu defined in location "'.$theme_location.'" -->';
@@ -140,31 +121,26 @@ function create_bootstrap_menu( $theme_location ) {
 }
 
 
+ //print_r(get_nav_menu_locations());
 
-// custom menu example @ https://digwp.com/2011/11/html-formatting-custom-menus/
-function clean_custom_menus( $theme_location ) {
-	$menu_name = $theme_location; // specify custom menu slug
-	$menu_list = '';
-	if (($locations = get_nav_menu_locations()) && isset($locations[$menu_name])) {
-		$menu = wp_get_nav_menu_object($locations[$menu_name]);
-		$menu_items = wp_get_nav_menu_items($menu->term_id);
 
-		$menu_list = '<nav>' ."\n";
-		$menu_list .= "\t\t\t\t". '<ul>' ."\n";
-		foreach ((array) $menu_items as $key => $menu_item) {
-			$title = $menu_item->title;
-			$url = $menu_item->url;
-			$menu_list .= "\t\t\t\t\t". '<li><a href="'. $url .'">'. $title .'</a></li>' ."\n";
-		}
-		$menu_list .= "\t\t\t\t". '</ul>' ."\n";
-		$menu_list .= "\t\t\t". '</nav>' ."\n";
-	} else {
-		// $menu_list = '<!-- no list defined -->';
-	}
-	echo $menu_list;
+class Custom_Walker_Nav_Menu_top extends Walker_Nav_Menu
+{
+    function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) 
+    {
+        $is_current_item = '';
+        if(array_search('current-menu-item', $item->classes) != 0)
+        {
+            $is_current_item = ' active';
+        }
+        echo '<li class="nav-item'.$is_current_item.'"><a class="nav-link waves-effect" href="'.$item->url.'">'.$item->title;
+    }
+    
+
+    function end_el( &$output, $item, $depth = 0, $args = array() ) {
+        echo '</a></li>';
+    }
 }
-
- print_r(get_nav_menu_locations());
 
 
 ?>

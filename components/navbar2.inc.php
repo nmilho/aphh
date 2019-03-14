@@ -30,26 +30,23 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
 			
 			<?php if ( has_nav_menu( 'header-menu' ) ) : ?>
-
+			<ul class="navbar-nav mr-auto">	
 					<?php
-						/*wp_nav_menu(
+						wp_nav_menu(
 							array(
-								'theme_location' => 'header-menu',
-								'menu_class' => 'navbar-nav mr-auto',
+								'theme_location' => 'header-menu',	
+				                'menu_class' 	  => 'nav-item',															
+								'walker' => new Custom_Walker_Nav_Menu_Top
 							)
-						);*/
+						);
 						//create_bootstrap_menu( 'header-menu' );
-						clean_custom_menus('header-menu');
+						//clean_custom_menus('header-menu');
 					?>
-
+			</ul>
 			<?php endif; ?>
 
 		</div><!-- Links -->
 	<?php endif; ?>
-
-
-
-
 
 
 	</div>
