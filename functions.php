@@ -58,6 +58,11 @@ function register_my_menus() {
 add_action( 'after_setup_theme', 'themename_custom_logo_setup' );
 
 
+/**
+ * Include external files
+ */
+require_once('inc/pagination.inc.php');
+
 
 
 /**
